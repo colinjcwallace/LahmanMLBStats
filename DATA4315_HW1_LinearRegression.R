@@ -82,6 +82,14 @@ master_df <- salaries_clean %>%
   left_join(People %>% select(playerID, birthYear, nameGiven), by = "playerID") %>%
   mutate(Age = yearID - birthYear)
 
+train_df <- master_df %>%
+  filter(yearID >= 1985 & yearID <= 2018)
+
+score_df <- master_df %>%
+  filter(yearID >= 2019)
+
 
 # C'est fini! Export the master data frame to a CSV file
-write_csv(master_df, "battingSalaryData.csv")
+#write_csv(master_df, "battingSalaryData.csv")
+#write.csv(train_df, "battingSalaryData_Train.csv")
+#write.csv(score_df, "battingSalaryData_Score.csv")
