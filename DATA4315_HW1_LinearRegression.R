@@ -63,7 +63,9 @@ batting_clean <- Batting %>%
   ) %>%
   mutate(
     BA = ifelse(AB > 0, H / AB, 0),
-    OBP = ifelse((AB + BB) > 0, (H + BB) / (AB + BB), 0)
+    OBP = ifelse((AB + BB) > 0, (H + BB) / (AB + BB), 0),
+    SLG = ifelse(AB > 0, (H + 2 * (H - BB - SO) + 3 * HR) / AB, 0),
+    OPS = OBP + SLG
   )
 
 # Aggregate Salaries per season (in case traded mid-year)
@@ -82,4 +84,4 @@ master_df <- salaries_clean %>%
 
 
 # C'est fini! Export the master data frame to a CSV file
-write_csv(master_df, "master_df.csv")
+write_csv(master_df, "battingSalaryData.csv")
